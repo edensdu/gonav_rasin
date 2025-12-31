@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="goBack()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Konsènan Rasin Gonav</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="about-content">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-icon">
+      <ion-icon name="leaf-outline"></ion-icon>
+    </div>
+    <h1>Rasin Gonav</h1>
+    <p class="tagline">Platfòm Kominotè pou La Gonâve</p>
+    <p class="version">Vèsyon 1.0.0</p>
+  </div>
+
+  <!-- What is this app -->
+  <div class="section">
+    <h2 class="section-title">
+      <ion-icon name="information-circle-outline"></ion-icon>
+      Kisa Aplikasyon Sa A Ye?
+    </h2>
+    <div class="info-card">
+      <p>
+        <strong>Rasin Gonav</strong> se yon aplikasyon ki konbine de pwogram enpòtan pou kominote La Gonâve:
+      </p>
+      <div class="program-item">
+        <div class="program-badge sol">Sol Lakay</div>
+        <p>Jesyon gwoup epay (mutuelle/sol) pou ede fanmi yo ekonomize ak jwenn prè.</p>
+      </div>
+      <div class="program-item">
+        <div class="program-badge lidechip">Rasin Lidèchip</div>
+        <p>Fòmasyon lidèchip pou manm VPC (Komite Planifikasyon Vilaj) yo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to Use -->
+  <div class="section">
+    <h2 class="section-title">
+      <ion-icon name="help-circle-outline"></ion-icon>
+      Kijan Pou Itilize
+    </h2>
+    <div class="steps-list">
+      <div class="step-item" *ngFor="let step of howToSteps">
+        <div class="step-icon">
+          <ion-icon [name]="step.icon"></ion-icon>
+        </div>
+        <div class="step-content">
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="section">
+    <h2 class="section-title">
+      <ion-icon name="star-outline"></ion-icon>
+      Fonksyonalite Yo
+    </h2>
+    <div class="feature-card" *ngFor="let feature of features">
+      <div class="feature-header">
+        <ion-icon [name]="feature.icon"></ion-icon>
+        <h3>{{ feature.title }}</h3>
+      </div>
+      <ul class="feature-list">
+        <li *ngFor="let item of feature.items">
+          <ion-icon name="checkmark-outline"></ion-icon>
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Credits -->
+  <div class="section">
+    <h2 class="section-title">
+      <ion-icon name="heart-outline"></ion-icon>
+      Kredi
+    </h2>
+    <div class="credits-card">
+      <p>Devlope avèk sipò <strong>Rasin Devlopman</strong> (Roots of Development)</p>
+      <p class="org-desc">Travay avèk pèp La Gonâve pou bati kominote dirab.</p>
+      <a href="https://rootsofdevelopment.org" target="_blank" class="org-link">
+        <ion-icon name="globe-outline"></ion-icon>
+        rootsofdevelopment.org
+      </a>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="actions-section">
+    <button class="action-btn" (click)="restartOnboarding()">
+      <ion-icon name="refresh-outline"></ion-icon>
+      Wè Entwodiksyon Ankò
+    </button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p class="motto">Ansanm nou ka fè tout bagay</p>
+    <p class="copyright">© 2025 Rasin Devlopman</p>
+  </div>
+</ion-content>

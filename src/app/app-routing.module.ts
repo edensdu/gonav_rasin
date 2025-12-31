@@ -4,8 +4,16 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'onboarding',
     pathMatch: 'full'
+  },
+  {
+    path: 'onboarding',
+    loadChildren: () => import('./pages/onboarding/onboarding.module').then(m => m.OnboardingPageModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule)
   },
   {
     path: 'public',
@@ -49,7 +57,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'public'
+    redirectTo: 'onboarding'
   }
 ];
 
