@@ -1,0 +1,121 @@
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  padding: 20px;
+  text-align: center;
+
+  .empty-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    margin: 0 0 20px 0;
+  }
+
+  ion-button {
+    --border-radius: 12px;
+  }
+}
+
+ion-list {
+  padding: 16px;
+  background: transparent;
+}
+
+.group-card {
+  margin: 0 0 16px 0;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  ion-card-content {
+    padding: 16px;
+  }
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .group-icon {
+    font-size: 2rem;
+    margin-right: 12px;
+  }
+
+  .group-info {
+    flex: 1;
+
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ion-color-dark);
+      margin: 0 0 4px 0;
+    }
+
+    .group-type {
+      font-size: 0.85rem;
+      color: var(--ion-color-medium);
+      margin: 0;
+    }
+  }
+
+  .chevron {
+    color: var(--ion-color-medium);
+    font-size: 1.2rem;
+  }
+}
+
+.group-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  background: var(--ion-color-light);
+  border-radius: 12px;
+  margin-bottom: 12px;
+
+  .stat {
+    text-align: center;
+
+    .value {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ion-color-primary);
+    }
+
+    .label {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--ion-color-medium);
+      margin-top: 2px;
+    }
+  }
+}
+
+.group-meeting {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 1rem;
+  }
+}
+
+ion-fab-button {
+  --background: var(--ion-color-primary);
+}

@@ -1,0 +1,63 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/leadership" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Fòmasyon</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addTraining()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Categories -->
+  <div class="categories">
+    <ion-chip [color]="selectedCategory === 'all' ? 'primary' : 'medium'" (click)="filterByCategory('all')">
+      Tout
+    </ion-chip>
+    <ion-chip [color]="selectedCategory === 'leadership' ? 'primary' : 'medium'" (click)="filterByCategory('leadership')">
+      Lidèchip
+    </ion-chip>
+    <ion-chip [color]="selectedCategory === 'project_management' ? 'primary' : 'medium'" (click)="filterByCategory('project_management')">
+      Jesyon Pwojè
+    </ion-chip>
+    <ion-chip [color]="selectedCategory === 'civic' ? 'primary' : 'medium'" (click)="filterByCategory('civic')">
+      Sivik
+    </ion-chip>
+    <ion-chip [color]="selectedCategory === 'entrepreneurship' ? 'primary' : 'medium'" (click)="filterByCategory('entrepreneurship')">
+      Antreprenarya
+    </ion-chip>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="filteredTrainings.length === 0">
+    <div class="empty-icon">📚</div>
+    <h2>Pa gen fòmasyon ankò</h2>
+    <p>Ajoute premye fòmasyon an</p>
+    <ion-button (click)="addTraining()">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Ajoute Fòmasyon
+    </ion-button>
+  </div>
+
+  <!-- Training List -->
+  <ion-list *ngIf="filteredTrainings.length > 0" lines="none">
+    <ion-card *ngFor="let training of filteredTrainings" class="training-card">
+      <ion-card-content>
+        <div class="training-header">
+          <div class="training-icon">{{ getCategoryIcon(training.category) }}</div>
+          <ion-badge color="primary">{{ training.hours }} èdtan</ion-badge>
+        </div>
+        <h3>{{ training.nameCreole }}</h3>
+        <p class="training-name">{{ training.name }}</p>
+        <p class="training-desc" *ngIf="training.description">{{ training.description }}</p>
+        <ion-chip color="light" size="small">
+          {{ getCategoryLabel(training.category) }}
+        </ion-chip>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

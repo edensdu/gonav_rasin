@@ -1,0 +1,132 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/public" text="Retounen"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ isRegistering ? 'Kreye Kont' : 'Konekte' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="login-container">
+    <!-- Logo -->
+    <div class="logo-section">
+      <div class="logo">🌱</div>
+      <h1>Rasin Gonav</h1>
+      <p>{{ isRegistering ? 'Kreye yon kont nouvo' : 'Antre nan kont ou' }}</p>
+    </div>
+
+    <!-- Login Form -->
+    <form (ngSubmit)="onSubmit()" *ngIf="!isRegistering">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">Nimewo Telefòn</ion-label>
+          <ion-input
+            type="tel"
+            [(ngModel)]="phone"
+            name="phone"
+            placeholder="509 1234 5678"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">PIN (4 chif)</ion-label>
+          <ion-input
+            type="password"
+            [(ngModel)]="pin"
+            name="pin"
+            placeholder="● ● ● ●"
+            maxlength="4"
+            inputmode="numeric"
+            required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" type="submit" [disabled]="isLoading">
+        <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+        <span *ngIf="!isLoading">Konekte</span>
+      </ion-button>
+    </form>
+
+    <!-- Register Form -->
+    <form (ngSubmit)="onSubmit()" *ngIf="isRegistering">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">Non Konplè</ion-label>
+          <ion-input
+            type="text"
+            [(ngModel)]="name"
+            name="name"
+            placeholder="Non ou"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Nimewo Telefòn</ion-label>
+          <ion-input
+            type="tel"
+            [(ngModel)]="phone"
+            name="phone"
+            placeholder="509 1234 5678"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Kreye PIN (4 chif)</ion-label>
+          <ion-input
+            type="password"
+            [(ngModel)]="pin"
+            name="pin"
+            placeholder="● ● ● ●"
+            maxlength="4"
+            inputmode="numeric"
+            required>
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Konfime PIN</ion-label>
+          <ion-input
+            type="password"
+            [(ngModel)]="confirmPin"
+            name="confirmPin"
+            placeholder="● ● ● ●"
+            maxlength="4"
+            inputmode="numeric"
+            required>
+          </ion-input>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" type="submit" [disabled]="isLoading">
+        <ion-spinner name="crescent" *ngIf="isLoading"></ion-spinner>
+        <span *ngIf="!isLoading">Kreye Kont</span>
+      </ion-button>
+    </form>
+
+    <!-- Toggle Mode -->
+    <div class="toggle-mode">
+      <p *ngIf="!isRegistering">
+        Ou pa gen kont?
+        <a (click)="toggleMode()">Kreye youn</a>
+      </p>
+      <p *ngIf="isRegistering">
+        Ou gen kont deja?
+        <a (click)="toggleMode()">Konekte</a>
+      </p>
+    </div>
+
+    <!-- Demo Mode -->
+    <div class="demo-section">
+      <ion-button expand="block" fill="outline" (click)="enterDemoMode()">
+        <ion-icon name="play-outline" slot="start"></ion-icon>
+        Eseye Vèsyon Demo
+      </ion-button>
+      <p class="demo-note">Pa bezwen kont pou wè kijan li mache</p>
+    </div>
+  </div>
+</ion-content>

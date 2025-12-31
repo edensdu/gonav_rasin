@@ -1,0 +1,109 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/groups" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ group?.name || 'Gwoup' }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="showOptions()">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="group">
+  <!-- Group Summary -->
+  <div class="summary-section">
+    <div class="summary-header">
+      <div class="group-icon">
+        {{ group.type === 'mutuelle' ? '🤝' : group.type === 'sol' ? '💰' : '👥' }}
+      </div>
+      <div class="group-meta">
+        <span class="badge">{{ group.type | uppercase }}</span>
+        <span class="section">{{ group.section }}</span>
+      </div>
+    </div>
+
+    <div class="summary-stats">
+      <div class="main-stat">
+        <div class="value">{{ group.totalSavings | number }} HTG</div>
+        <div class="label">Total Epay</div>
+      </div>
+    </div>
+
+    <div class="quick-stats">
+      <div class="stat">
+        <ion-icon name="people-outline"></ion-icon>
+        <span>{{ group.memberCount }} manm</span>
+      </div>
+      <div class="stat">
+        <ion-icon name="document-text-outline"></ion-icon>
+        <span>{{ group.activeLoans }} prè aktif</span>
+      </div>
+      <div class="stat" *ngIf="group.meetingDay">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>{{ group.meetingDay }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="actions-section">
+    <ion-button expand="block" (click)="goToContributions()">
+      <ion-icon name="add-circle-outline" slot="start"></ion-icon>
+      Ajoute Kotizasyon
+    </ion-button>
+  </div>
+
+  <!-- Menu Cards -->
+  <div class="menu-section">
+    <ion-card class="menu-card" (click)="goToMembers()">
+      <ion-card-content>
+        <div class="menu-icon">👥</div>
+        <div class="menu-info">
+          <h3>Manm yo</h3>
+          <p>{{ group.memberCount }} manm nan gwoup la</p>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card" (click)="goToContributions()">
+      <ion-card-content>
+        <div class="menu-icon">💵</div>
+        <div class="menu-info">
+          <h3>Kotizasyon</h3>
+          <p>Wè tout kontribisyon</p>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="menu-card" (click)="goToLoans()">
+      <ion-card-content>
+        <div class="menu-icon">📋</div>
+        <div class="menu-info">
+          <h3>Prè</h3>
+          <p>{{ group.activeLoans }} prè aktif</p>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Recent Activity -->
+  <div class="activity-section" *ngIf="recentContributions.length > 0">
+    <h2>Dènye Aktivite</h2>
+    <ion-list lines="none">
+      <ion-item *ngFor="let contrib of recentContributions">
+        <ion-icon name="arrow-down-circle" color="success" slot="start"></ion-icon>
+        <ion-label>
+          <h3>{{ contrib.memberName }}</h3>
+          <p>{{ contrib.date | date:'d MMM yyyy' }}</p>
+        </ion-label>
+        <ion-note slot="end" color="success">+{{ contrib.amount | number }} HTG</ion-note>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>

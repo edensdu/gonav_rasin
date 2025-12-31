@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/group-detail/' + groupId" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Kotizasyon</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addContribution()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Summary -->
+  <div class="summary-section">
+    <div class="total-amount">{{ totalContributions | number }} HTG</div>
+    <div class="total-label">Total Kotizasyon</div>
+    <div class="count">{{ contributions.length }} tranzaksyon</div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="contributions.length === 0">
+    <div class="empty-icon">💵</div>
+    <h2>Pa gen kotizasyon ankò</h2>
+    <p>Anrejistre premye kotizasyon an</p>
+    <ion-button (click)="addContribution()">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Ajoute Kotizasyon
+    </ion-button>
+  </div>
+
+  <!-- Contributions List -->
+  <ion-list *ngIf="contributions.length > 0" lines="none">
+    <div class="date-group" *ngFor="let group of groupedContributions">
+      <div class="date-header">{{ group.date | date:'EEEE, d MMMM yyyy' }}</div>
+      <ion-item *ngFor="let contrib of group.items" class="contrib-item">
+        <ion-icon name="arrow-down-circle" color="success" slot="start"></ion-icon>
+        <ion-label>
+          <h2>{{ contrib.memberName }}</h2>
+          <p *ngIf="contrib.notes">{{ contrib.notes }}</p>
+        </ion-label>
+        <ion-note slot="end" color="success">+{{ contrib.amount | number }} HTG</ion-note>
+      </ion-item>
+    </div>
+  </ion-list>
+
+  <!-- FAB -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addContribution()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

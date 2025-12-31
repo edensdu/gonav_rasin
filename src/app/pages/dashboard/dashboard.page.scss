@@ -1,0 +1,1460 @@
+// Haiti flag colors
+$haiti-blue: #00209F;
+$haiti-red: #D21034;
+$haiti-blue-light: #3355cc;
+$haiti-red-light: #e84466;
+
+// Chart colors
+$chart-color-1: #00209F;
+$chart-color-2: #D21034;
+$chart-color-3: #5A9A6B;
+
+// ============================================
+// TOP NAVIGATION BAR
+// ============================================
+.nav-toolbar {
+  --background: linear-gradient(135deg, #{$haiti-blue} 0%, #{$haiti-red} 100%);
+  --color: white;
+  --border-width: 0;
+  --min-height: 56px;
+
+  ion-button {
+    --color: white;
+    --padding-start: 8px;
+    --padding-end: 8px;
+
+    ion-icon {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.nav-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+// ============================================
+// BOTTOM TAB NAVIGATION
+// ============================================
+ion-footer {
+  background: white;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
+  background: white;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 8px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 12px;
+  min-width: 56px;
+  -webkit-tap-highlight-color: transparent;
+
+  ion-icon {
+    font-size: 1.3rem;
+    color: #636e72;
+    margin-bottom: 2px;
+    transition: all 0.2s ease;
+  }
+
+  span {
+    font-size: 0.6rem;
+    color: #636e72;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  &:hover {
+    background: rgba($haiti-blue, 0.05);
+
+    ion-icon, span {
+      color: $haiti-blue;
+    }
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &.active {
+    background: rgba($haiti-blue, 0.1);
+
+    ion-icon {
+      color: $haiti-blue;
+      transform: scale(1.1);
+    }
+
+    span {
+      color: $haiti-blue;
+      font-weight: 600;
+    }
+  }
+}
+
+// ============================================
+// BASE STYLES
+// ============================================
+ion-content {
+  --background: #f8f9fa;
+}
+
+// Hero Header
+.hero-header {
+  background: linear-gradient(135deg, $haiti-blue 0%, $haiti-red 100%);
+  padding: 40px 20px 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-logo {
+  font-size: 3rem;
+  margin-bottom: 8px;
+}
+
+.hero-header h1 {
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 8px 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-subtitle {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.1rem;
+  margin: 0 0 4px 0;
+}
+
+.hero-tagline {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.hero-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: #f8f9fa;
+  }
+}
+
+// Stats Overview
+.stats-overview {
+  margin-top: -30px;
+  padding: 0 16px;
+  position: relative;
+  z-index: 2;
+}
+
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.stat-box {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &.primary { border-top: 4px solid $haiti-blue; }
+  &.success { border-top: 4px solid #5A9A6B; }
+  &.warning { border-top: 4px solid #D4A44A; }
+  &.info { border-top: 4px solid $haiti-red; }
+}
+
+.stat-icon {
+  font-size: 1.5rem;
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #2d3436;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: #636e72;
+  margin-top: 2px;
+}
+
+// Section titles
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #2d3436;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  .title-icon {
+    font-size: 1.3rem;
+  }
+}
+
+// Chart Section
+.chart-section {
+  padding: 24px 16px;
+  background: white;
+  margin: 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.chart-container {
+  padding: 16px 0;
+}
+
+.bar-chart {
+  position: relative;
+  height: 180px;
+}
+
+.chart-bars {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 150px;
+  padding: 0 10px;
+}
+
+.bar-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  max-width: 80px;
+}
+
+.bar {
+  width: 40px;
+  background: linear-gradient(180deg, $haiti-blue 0%, $haiti-blue-light 100%);
+  border-radius: 8px 8px 0 0;
+  min-height: 20px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transition: height 0.5s ease;
+  position: relative;
+
+  &:nth-child(2n) {
+    background: linear-gradient(180deg, $haiti-red 0%, $haiti-red-light 100%);
+  }
+}
+
+.bar-value {
+  position: absolute;
+  top: -24px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #2d3436;
+  white-space: nowrap;
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  color: #636e72;
+  margin-top: 8px;
+  text-align: center;
+  max-width: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chart-baseline {
+  height: 2px;
+  background: #e9ecef;
+  margin-top: 8px;
+}
+
+// Groups Section
+.groups-section {
+  padding: 24px 16px;
+}
+
+.groups-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.group-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.group-type-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+
+  &.mutuelle { background: rgba($haiti-blue, 0.1); }
+  &.sol { background: rgba(#5A9A6B, 0.1); }
+  &.vpc { background: rgba($haiti-red, 0.1); }
+  &.cbo { background: rgba(#D4A44A, 0.1); }
+}
+
+.group-info {
+  flex: 1;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin: 0 0 2px 0;
+  }
+
+  .group-location {
+    font-size: 0.85rem;
+    color: #636e72;
+    margin: 0;
+  }
+}
+
+.group-stats-mini {
+  display: flex;
+  gap: 16px;
+  padding: 12px 0;
+  border-top: 1px solid #f1f2f6;
+  border-bottom: 1px solid #f1f2f6;
+  margin-bottom: 12px;
+}
+
+.mini-stat {
+  flex: 1;
+  text-align: center;
+
+  .value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $haiti-blue;
+  }
+
+  .label {
+    display: block;
+    font-size: 0.75rem;
+    color: #636e72;
+  }
+}
+
+.group-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  flex: 1;
+  height: 8px;
+  background: #f1f2f6;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $haiti-blue, $haiti-red);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.progress-label {
+  font-size: 0.75rem;
+  color: #636e72;
+  white-space: nowrap;
+}
+
+// Donut Chart Section
+.distribution-section {
+  padding: 24px 16px;
+  background: white;
+  margin: 0 16px 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.donut-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+.donut-chart {
+  position: relative;
+  width: 160px;
+  height: 160px;
+}
+
+.donut-svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.donut-segment {
+  fill: none;
+  stroke-width: 15;
+  transition: stroke-dasharray 0.5s ease;
+
+  &.seg-1 { stroke: $chart-color-1; }
+  &.seg-2 { stroke: $chart-color-2; }
+  &.seg-3 { stroke: $chart-color-3; }
+}
+
+.donut-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  .donut-total {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #2d3436;
+  }
+
+  .donut-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #636e72;
+  }
+}
+
+.donut-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+
+  &.color-1 { background: $chart-color-1; }
+  &.color-2 { background: $chart-color-2; }
+  &.color-3 { background: $chart-color-3; }
+}
+
+.legend-name {
+  flex: 1;
+  font-size: 0.9rem;
+  color: #2d3436;
+}
+
+.legend-value {
+  font-size: 0.85rem;
+  color: #636e72;
+}
+
+// Leadership Section
+.leadership-section {
+  padding: 24px 16px;
+  background: linear-gradient(135deg, rgba($haiti-blue, 0.05) 0%, rgba($haiti-red, 0.05) 100%);
+}
+
+.leadership-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.leadership-card {
+  background: white;
+  border-radius: 16px;
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.leadership-number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: $haiti-blue;
+  line-height: 1;
+}
+
+.leadership-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #2d3436;
+  margin-top: 4px;
+}
+
+.leadership-desc {
+  font-size: 0.65rem;
+  color: #636e72;
+  margin-top: 2px;
+}
+
+// Training Section
+.training-section {
+  padding: 24px 16px;
+}
+
+.training-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+.training-card {
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .training-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin: 0 0 4px 0;
+  }
+
+  .training-hours {
+    font-size: 0.8rem;
+    color: $haiti-blue;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+
+  .training-category {
+    font-size: 0.7rem;
+    color: #636e72;
+    background: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 12px;
+    display: inline-block;
+  }
+}
+
+// Impact Section
+.impact-section {
+  padding: 24px 16px;
+  background: white;
+  margin: 0 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.impact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.impact-card {
+  text-align: center;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 12px;
+
+  .impact-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+  }
+
+  .impact-stat {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: $haiti-blue;
+  }
+
+  .impact-label {
+    font-size: 0.8rem;
+    color: #636e72;
+    margin-top: 2px;
+  }
+}
+
+// About Section
+.about-section {
+  padding: 24px 16px;
+  margin: 16px;
+  background: linear-gradient(135deg, $haiti-blue 0%, $haiti-red 100%);
+  border-radius: 16px;
+  color: white;
+}
+
+.about-content {
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+  }
+
+  p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.95;
+    margin: 0 0 16px 0;
+  }
+}
+
+.about-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+
+  .feature-icon {
+    color: #5A9A6B;
+    font-weight: bold;
+  }
+}
+
+// Footer
+.app-footer {
+  padding: 32px 16px;
+  text-align: center;
+  background: #2d3436;
+  color: white;
+}
+
+.footer-content {
+  .footer-brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin: 0 0 4px 0;
+  }
+
+  .footer-org {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    margin: 0;
+  }
+}
+
+// ============================================
+// INTERACTIVE ELEMENTS & MODALS
+// ============================================
+
+// Section Header with Add Button
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .section-title {
+    margin: 0;
+  }
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  background: $haiti-blue;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  ion-icon {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    background: darken($haiti-blue, 10%);
+    transform: scale(1.02);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &.light {
+    background: white;
+    color: $haiti-blue;
+    border: 2px solid $haiti-blue;
+
+    &:hover {
+      background: rgba($haiti-blue, 0.1);
+    }
+  }
+}
+
+.primary-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: $haiti-blue;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: darken($haiti-blue, 10%);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// Clickable Cards
+.clickable {
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.group-card.clickable {
+  .chevron {
+    color: #b2bec3;
+    font-size: 1.2rem;
+    transition: transform 0.2s ease;
+  }
+
+  &:hover .chevron {
+    transform: translateX(4px);
+    color: $haiti-blue;
+  }
+}
+
+// Group Action Buttons
+.group-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #f1f2f6;
+}
+
+.action-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 12px;
+  background: #f8f9fa;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #2d3436;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  ion-icon {
+    font-size: 1rem;
+    color: $haiti-blue;
+  }
+
+  &:hover {
+    background: rgba($haiti-blue, 0.1);
+  }
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    opacity: 0.6;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    color: #2d3436;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #636e72;
+    margin: 0 0 20px 0;
+  }
+}
+
+// VPC List
+.vpc-list {
+  margin-top: 20px;
+  background: white;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+
+  h3 {
+    font-size: 1rem;
+    color: #2d3436;
+    margin: 0 0 16px 0;
+  }
+}
+
+.vpc-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: #f8f9fa;
+  }
+
+  ion-icon {
+    color: #b2bec3;
+  }
+}
+
+.vpc-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $haiti-blue, $haiti-red);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.vpc-info {
+  flex: 1;
+
+  .vpc-name {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2d3436;
+  }
+
+  .vpc-section {
+    display: block;
+    font-size: 0.8rem;
+    color: #636e72;
+  }
+}
+
+// FAB Button
+.main-fab {
+  margin-bottom: 70px;
+  margin-right: 8px;
+
+  ion-fab-button[color="primary"] {
+    --background: $haiti-blue;
+    --background-activated: darken($haiti-blue, 10%);
+  }
+
+  ion-fab-button[color="success"] {
+    --background: #5A9A6B;
+  }
+
+  ion-fab-button[color="tertiary"] {
+    --background: $haiti-red;
+  }
+
+  ion-fab-button[color="warning"] {
+    --background: #D4A44A;
+  }
+}
+
+// ============================================
+// MODAL STYLES
+// ============================================
+.modal-content {
+  --padding-top: 20px;
+  --padding-start: 20px;
+  --padding-end: 20px;
+  --padding-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 8px;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 1rem;
+    color: #2d3436;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $haiti-blue;
+      background: white;
+    }
+
+    &::placeholder {
+      color: #b2bec3;
+    }
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23636e72' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+  }
+}
+
+.type-selector {
+  display: flex;
+  gap: 12px;
+
+  button {
+    flex: 1;
+    padding: 14px 16px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    background: #f8f9fa;
+    font-size: 0.95rem;
+    color: #636e72;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: $haiti-blue;
+    }
+
+    &.selected {
+      border-color: $haiti-blue;
+      background: rgba($haiti-blue, 0.1);
+      color: $haiti-blue;
+      font-weight: 600;
+    }
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  background: $haiti-blue;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+
+  &:hover:not(:disabled) {
+    background: darken($haiti-blue, 10%);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    background: #b2bec3;
+    cursor: not-allowed;
+  }
+}
+
+// Detail Modal
+.detail-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, rgba($haiti-blue, 0.1), rgba($haiti-red, 0.1));
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.detail-badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+
+  &.mutuelle { background: rgba($haiti-blue, 0.2); }
+  &.sol { background: rgba(#5A9A6B, 0.2); }
+}
+
+.detail-info {
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin: 0 0 4px 0;
+  }
+
+  p {
+    font-size: 0.9rem;
+    color: #636e72;
+    margin: 0;
+  }
+}
+
+.detail-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.detail-stat {
+  text-align: center;
+
+  .stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: $haiti-blue;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 0.8rem;
+    color: #636e72;
+    margin-top: 4px;
+  }
+}
+
+.detail-section {
+  margin-bottom: 24px;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2d3436;
+    margin: 0 0 12px 0;
+  }
+
+  p {
+    color: #636e72;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: #f8f9fa;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  ion-icon {
+    font-size: 1.5rem;
+    color: $haiti-blue;
+  }
+
+  span {
+    font-size: 0.85rem;
+    color: #2d3436;
+    font-weight: 500;
+  }
+
+  &:hover {
+    background: rgba($haiti-blue, 0.1);
+  }
+
+  &.danger {
+    ion-icon {
+      color: $haiti-red;
+    }
+
+    &:hover {
+      background: rgba($haiti-red, 0.1);
+    }
+  }
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f1f2f6;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .info-label {
+    color: #636e72;
+    font-size: 0.9rem;
+  }
+
+  .info-value {
+    color: #2d3436;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+}
+
+// ============================================
+// MEMBERS LIST STYLES
+// ============================================
+.section-header-inline {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2d3436;
+  }
+}
+
+.small-add-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $haiti-blue;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  ion-icon {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.members-list {
+  background: #f8f9fa;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid #e9ecef;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, $haiti-blue, $haiti-red);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.member-info {
+  flex: 1;
+  min-width: 0;
+
+  .member-name {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2d3436;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .member-role {
+    display: block;
+    font-size: 0.8rem;
+    color: #636e72;
+  }
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #b2bec3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  ion-icon {
+    font-size: 1.1rem;
+  }
+
+  &:hover {
+    background: rgba($haiti-red, 0.1);
+    color: $haiti-red;
+  }
+}
+
+.empty-mini {
+  text-align: center;
+  padding: 24px;
+  background: #f8f9fa;
+  border-radius: 12px;
+
+  p {
+    color: #636e72;
+    margin: 0 0 12px 0;
+    font-size: 0.9rem;
+  }
+}
+
+.small-primary-btn {
+  padding: 8px 16px;
+  background: $haiti-blue;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: darken($haiti-blue, 10%);
+  }
+}
+
+// ============================================
+// LOANS LIST STYLES
+// ============================================
+.loans-list {
+  background: #f8f9fa;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.loan-item {
+  padding: 12px;
+  border-bottom: 1px solid #e9ecef;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.loan-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+
+  .loan-name {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2d3436;
+  }
+
+  .loan-amount {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: $haiti-blue;
+  }
+}
+
+.loan-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .loan-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+
+    &.active {
+      background: rgba(#5A9A6B, 0.15);
+      color: #5A9A6B;
+    }
+
+    &.paid {
+      background: rgba($haiti-blue, 0.15);
+      color: $haiti-blue;
+    }
+
+    &.overdue {
+      background: rgba($haiti-red, 0.15);
+      color: $haiti-red;
+    }
+  }
+
+  .loan-due {
+    font-size: 0.8rem;
+    color: #636e72;
+  }
+}

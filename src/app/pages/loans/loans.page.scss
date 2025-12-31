@@ -1,0 +1,146 @@
+.summary-section {
+  background: var(--ion-color-primary);
+  color: white;
+  padding: 20px 16px;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.summary-item {
+  text-align: center;
+
+  .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .label {
+    font-size: 0.85rem;
+    opacity: 0.9;
+  }
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  padding: 20px;
+  text-align: center;
+
+  .empty-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    margin: 0 0 20px 0;
+  }
+
+  ion-button {
+    --border-radius: 12px;
+  }
+}
+
+.loans-section {
+  padding: 16px;
+
+  h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ion-color-dark);
+    margin: 0 0 12px 0;
+  }
+}
+
+.loan-card {
+  margin: 0 0 12px 0;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &.paid {
+    opacity: 0.7;
+  }
+
+  ion-card-content {
+    padding: 16px;
+  }
+}
+
+.loan-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+
+  .borrower {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--ion-color-dark);
+  }
+
+  ion-badge {
+    font-size: 0.7rem;
+  }
+}
+
+.loan-amount {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  margin-bottom: 12px;
+}
+
+.loan-progress {
+  margin-bottom: 12px;
+
+  .progress-bar {
+    height: 8px;
+    background: var(--ion-color-light);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 4px;
+
+    .progress-fill {
+      height: 100%;
+      background: var(--ion-color-success);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+    }
+  }
+
+  .progress-text {
+    font-size: 0.8rem;
+    color: var(--ion-color-medium);
+    text-align: right;
+  }
+}
+
+.loan-due, .loan-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 1rem;
+  }
+}
+
+ion-fab-button {
+  --background: var(--ion-color-primary);
+}

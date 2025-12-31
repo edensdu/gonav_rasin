@@ -1,0 +1,102 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Rasin Lidèchip</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-icon">🎓</div>
+    <h1>Volontè pou Chanjman</h1>
+    <p>Ajan chanjman nan kominote nou an</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-number">{{ vpcMembers.length }}</div>
+      <div class="stat-label">VPC</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ totalTrainingHours }}</div>
+      <div class="stat-label">Èdtan Fòmasyon</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">{{ actionPlans.length }}</div>
+      <div class="stat-label">Plan Aksyon</div>
+    </div>
+  </div>
+
+  <!-- VPC Members -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Manm VPC</h2>
+      <ion-button fill="clear" size="small" (click)="addVPCMember()">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Ajoute
+      </ion-button>
+    </div>
+
+    <div class="empty-state" *ngIf="vpcMembers.length === 0">
+      <p>Pa gen VPC ankò</p>
+      <ion-button size="small" (click)="addVPCMember()">Ajoute Premye VPC</ion-button>
+    </div>
+
+    <ion-list lines="none" *ngIf="vpcMembers.length > 0">
+      <ion-item *ngFor="let vpc of vpcMembers" class="vpc-item" (click)="viewVPC(vpc)">
+        <ion-avatar slot="start">
+          <div class="avatar-text">{{ getInitials(vpc.name) }}</div>
+        </ion-avatar>
+        <ion-label>
+          <h2>{{ vpc.name }}</h2>
+          <p>{{ vpc.section }} • {{ vpc.trainingHours }} èdtan</p>
+        </ion-label>
+        <ion-badge slot="end" color="primary">{{ vpc.trainingsCompleted.length }} fòmasyon</ion-badge>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Action Plans -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Plan Aksyon Kominotè</h2>
+      <ion-button fill="clear" size="small" (click)="addActionPlan()">
+        <ion-icon name="add" slot="start"></ion-icon>
+        Nouvo
+      </ion-button>
+    </div>
+
+    <div class="empty-state" *ngIf="actionPlans.length === 0">
+      <p>Pa gen plan aksyon ankò</p>
+      <ion-button size="small" (click)="addActionPlan()">Kreye Plan</ion-button>
+    </div>
+
+    <ion-card *ngFor="let plan of actionPlans" class="plan-card" (click)="viewPlan(plan)">
+      <ion-card-content>
+        <div class="plan-header">
+          <ion-badge [color]="getStatusColor(plan.status)">{{ getStatusLabel(plan.status) }}</ion-badge>
+          <ion-badge color="light">{{ getSectorLabel(plan.sector) }}</ion-badge>
+        </div>
+        <h3>{{ plan.title }}</h3>
+        <p class="plan-section">{{ plan.section }}</p>
+        <p class="plan-desc" *ngIf="plan.description">{{ plan.description }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Quick Links -->
+  <div class="section">
+    <h2>Resous</h2>
+    <ion-card class="link-card" (click)="goToTraining()">
+      <ion-card-content>
+        <ion-icon name="book-outline"></ion-icon>
+        <span>Wè Fòmasyon yo</span>
+        <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

@@ -1,0 +1,114 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>
+      <div class="logo-title">
+        <span class="logo-icon">🌱</span>
+        Rasin Gonav
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-content">
+      <h1>Byenveni nan Rasin Gonav</h1>
+      <p class="subtitle">Platfòm kominotè pou La Gonâve</p>
+      <p class="description">
+        Jesyon gwoup epay, fòmasyon lidèchip, ak devlopman kominotè
+      </p>
+    </div>
+  </div>
+
+  <!-- Quick Stats -->
+  <div class="stats-section">
+    <div class="stat-card">
+      <div class="stat-number">485+</div>
+      <div class="stat-label">Òganizasyon</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">24,000+</div>
+      <div class="stat-label">Manm</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">11</div>
+      <div class="stat-label">Seksyon</div>
+    </div>
+  </div>
+
+  <!-- Main Features -->
+  <div class="features-section">
+    <h2>Sèvis Nou Yo</h2>
+
+    <ion-card class="feature-card" (click)="goToLogin()">
+      <ion-card-content>
+        <div class="feature-icon">💰</div>
+        <div class="feature-info">
+          <h3>Sol Lakay</h3>
+          <p>Jere gwoup epay ou, kontribisyon, ak prè</p>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="feature-card" (click)="goToLogin()">
+      <ion-card-content>
+        <div class="feature-icon">🎓</div>
+        <div class="feature-info">
+          <h3>Rasin Lidèchip</h3>
+          <p>Fòmasyon VPC, plan aksyon kominotè</p>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="feature-card" (click)="goToLogin()">
+      <ion-card-content>
+        <div class="feature-icon">👥</div>
+        <div class="feature-info">
+          <h3>Rezo Òganizasyon</h3>
+          <p>Jwenn ak konekte ak lòt gwoup</p>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- About Section -->
+  <div class="about-section">
+    <h2>Sou Nou</h2>
+    <p>
+      Rasin Gonav se yon platfòm ki fèt pou kominote La Gonâve.
+      Nou travay ansanm ak Rasin Devlopman pou ranfòse kapasite
+      lidè kominotè yo ak ofisyèl eli lokal yo.
+    </p>
+    <p>
+      <strong>Misyon nou:</strong> Ankouraje devlopman ki dirije
+      pa kominote a pou amelyore kalite lavi sou zile a.
+    </p>
+  </div>
+
+  <!-- Contact Section -->
+  <div class="contact-section">
+    <h2>Kontakte Nou</h2>
+    <ion-button expand="block" color="success" (click)="openWhatsApp()">
+      <ion-icon name="logo-whatsapp" slot="start"></ion-icon>
+      Ekri nou sou WhatsApp
+    </ion-button>
+  </div>
+
+  <!-- Login Button -->
+  <div class="login-section">
+    <ion-button expand="block" (click)="goToLogin()">
+      <ion-icon name="log-in-outline" slot="start"></ion-icon>
+      Konekte / Kreye Kont
+    </ion-button>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>Fèt ak ❤️ pou La Gonâve</p>
+    <p class="partner-text">An patenarya ak Rasin Devlopman</p>
+  </div>
+</ion-content>

@@ -1,0 +1,92 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/group-detail/' + groupId" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Prè</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addLoan()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Summary -->
+  <div class="summary-section">
+    <div class="summary-grid">
+      <div class="summary-item">
+        <div class="value">{{ totalLoaned | number }} HTG</div>
+        <div class="label">Total Prete</div>
+      </div>
+      <div class="summary-item">
+        <div class="value">{{ activeLoans.length }}</div>
+        <div class="label">Prè Aktif</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="loans.length === 0">
+    <div class="empty-icon">📋</div>
+    <h2>Pa gen prè ankò</h2>
+    <p>Kreye premye prè a</p>
+    <ion-button (click)="addLoan()">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Nouvo Prè
+    </ion-button>
+  </div>
+
+  <!-- Active Loans -->
+  <div class="loans-section" *ngIf="activeLoans.length > 0">
+    <h2>Prè Aktif</h2>
+    <ion-card *ngFor="let loan of activeLoans" class="loan-card" (click)="viewLoan(loan)">
+      <ion-card-content>
+        <div class="loan-header">
+          <div class="borrower">{{ loan.memberName }}</div>
+          <ion-badge [color]="loan.status === 'overdue' ? 'danger' : 'warning'">
+            {{ loan.status === 'overdue' ? 'An reta' : 'Aktif' }}
+          </ion-badge>
+        </div>
+        <div class="loan-amount">{{ loan.amount | number }} HTG</div>
+        <div class="loan-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="(loan.amountPaid / loan.totalDue) * 100"></div>
+          </div>
+          <div class="progress-text">
+            {{ loan.amountPaid | number }} / {{ loan.totalDue | number }} HTG
+          </div>
+        </div>
+        <div class="loan-due">
+          <ion-icon name="calendar-outline"></ion-icon>
+          Dat limit: {{ loan.dueDate | date:'d MMM yyyy' }}
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Paid Loans -->
+  <div class="loans-section" *ngIf="paidLoans.length > 0">
+    <h2>Prè Peye</h2>
+    <ion-card *ngFor="let loan of paidLoans" class="loan-card paid">
+      <ion-card-content>
+        <div class="loan-header">
+          <div class="borrower">{{ loan.memberName }}</div>
+          <ion-badge color="success">Peye</ion-badge>
+        </div>
+        <div class="loan-amount">{{ loan.amount | number }} HTG</div>
+        <div class="loan-date">
+          Peye: {{ loan.payments[loan.payments.length - 1]?.date | date:'d MMM yyyy' }}
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- FAB -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addLoan()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

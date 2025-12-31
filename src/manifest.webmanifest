@@ -1,0 +1,20 @@
+{
+  "name": "Rasin Gonav",
+  "short_name": "Rasin Gonav",
+  "description": "Platfòm kominotè pou La Gonâve - Sol Lakay & Rasin Lidèchip",
+  "start_url": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FDFCFB",
+  "theme_color": "#4A7C94",
+  "lang": "ht",
+  "icons": [
+    {
+      "src": "assets/icon/favicon.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["finance", "productivity", "social"]
+}

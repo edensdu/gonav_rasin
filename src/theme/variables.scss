@@ -1,0 +1,165 @@
+// Rasin Gonav - Haiti/Roots Theme
+// Colors inspired by Haiti flag (blue, red) and Roots of Development
+
+// Haiti flag colors
+$haiti-blue: #00209F;
+$haiti-red: #D21034;
+
+:root {
+  // Haiti flag colors as CSS variables
+  --haiti-blue: #{$haiti-blue};
+  --haiti-red: #{$haiti-red};
+
+  // Primary - Haiti blue
+  --ion-color-primary: #00209F;
+  --ion-color-primary-rgb: 74, 124, 148;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #3F6D82;
+  --ion-color-primary-tint: #5C8A9F;
+
+  // Secondary - Warm terracotta (earthy Roots tone)
+  --ion-color-secondary: #C17B5F;
+  --ion-color-secondary-rgb: 193, 123, 95;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #AA6C53;
+  --ion-color-secondary-tint: #C78870;
+
+  // Tertiary - Deep purple/maroon (leadership)
+  --ion-color-tertiary: #8B5A7A;
+  --ion-color-tertiary-rgb: 139, 90, 122;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #7A4F6B;
+  --ion-color-tertiary-tint: #976B87;
+
+  // Success - Soft green (growth/nature)
+  --ion-color-success: #5A9A6B;
+  --ion-color-success-rgb: 90, 154, 107;
+  --ion-color-success-contrast: #ffffff;
+  --ion-color-success-contrast-rgb: 255, 255, 255;
+  --ion-color-success-shade: #4F885E;
+  --ion-color-success-tint: #6BA47A;
+
+  // Warning - Warm amber
+  --ion-color-warning: #D4A44A;
+  --ion-color-warning-rgb: 212, 164, 74;
+  --ion-color-warning-contrast: #000000;
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: #BA9041;
+  --ion-color-warning-tint: #D8AD5C;
+
+  // Danger - Soft red (pastel Haiti red)
+  --ion-color-danger: #C45C5C;
+  --ion-color-danger-rgb: 196, 92, 92;
+  --ion-color-danger-contrast: #ffffff;
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: #AC5151;
+  --ion-color-danger-tint: #CA6C6C;
+
+  // Dark
+  --ion-color-dark: #2D3436;
+  --ion-color-dark-rgb: 45, 52, 54;
+  --ion-color-dark-contrast: #ffffff;
+  --ion-color-dark-contrast-rgb: 255, 255, 255;
+  --ion-color-dark-shade: #282E30;
+  --ion-color-dark-tint: #42484A;
+
+  // Medium
+  --ion-color-medium: #92949C;
+  --ion-color-medium-rgb: 146, 148, 156;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #808289;
+  --ion-color-medium-tint: #9D9FA6;
+
+  // Light - Warm off-white
+  --ion-color-light: #F7F4F0;
+  --ion-color-light-rgb: 247, 244, 240;
+  --ion-color-light-contrast: #000000;
+  --ion-color-light-contrast-rgb: 0, 0, 0;
+  --ion-color-light-shade: #D9D7D3;
+  --ion-color-light-tint: #F8F5F2;
+
+  // Background colors
+  --ion-background-color: #FDFCFB;
+  --ion-background-color-rgb: 253, 252, 251;
+
+  // Text colors
+  --ion-text-color: #2D3436;
+  --ion-text-color-rgb: 45, 52, 54;
+
+  // Card background
+  --ion-card-background: #FFFFFF;
+
+  // Toolbar
+  --ion-toolbar-background: var(--ion-color-primary);
+  --ion-toolbar-color: #ffffff;
+
+  // Item background
+  --ion-item-background: #FFFFFF;
+
+  // Border radius for rounded corners
+  --ion-border-radius: 12px;
+}
+
+// iOS specific adjustments
+.ios {
+  --ion-toolbar-segment-color: var(--ion-color-primary);
+  --ion-toolbar-segment-color-checked: #fff;
+  --ion-toolbar-segment-background-checked: var(--ion-color-primary);
+}
+
+// Android specific adjustments
+.md {
+  --ion-toolbar-segment-color: var(--ion-color-primary);
+}
+
+// Global font settings
+:root {
+  --ion-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+// Custom card styling
+ion-card {
+  --background: var(--ion-card-background);
+  border-radius: var(--ion-border-radius);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+// Button styling
+ion-button {
+  --border-radius: 10px;
+  font-weight: 600;
+}
+
+// Chip styling
+ion-chip {
+  --border-radius: 16px;
+}
+
+// Badge styling
+ion-badge {
+  --border-radius: 8px;
+  padding: 4px 10px;
+}
+
+// Safe area padding for modern devices
+ion-content {
+  --padding-bottom: env(safe-area-inset-bottom);
+}
+
+// Smooth page transitions
+.ion-page {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.8;
+  }
+  to {
+    opacity: 1;
+  }
+}

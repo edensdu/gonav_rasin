@@ -1,0 +1,767 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar class="nav-toolbar">
+    <ion-buttons slot="start">
+      <ion-button (click)="scrollToTop()">
+        <ion-icon name="home-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      <span class="nav-title">Rasin Gonav</span>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="scrollToSection('about')">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollEvents]="true" #content>
+  <!-- Hero Header -->
+  <div class="hero-header">
+    <div class="hero-content">
+      <div class="hero-logo">🌱</div>
+      <h1>Rasin Gonav</h1>
+      <p class="hero-subtitle">Platfòm Kominotè pou La Gonâve</p>
+      <p class="hero-tagline">Sol Lakay & Rasin Lidèchip</p>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C57.1,118.92,156.63,69.08,321.39,56.44Z"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Quick Stats Overview -->
+  <section class="stats-overview">
+    <div class="stats-container">
+      <div class="stat-box primary" (click)="scrollToSection('groups')">
+        <div class="stat-icon">👥</div>
+        <div class="stat-value">{{ totalMembers }}</div>
+        <div class="stat-label">Manm Total</div>
+      </div>
+      <div class="stat-box success" (click)="scrollToSection('groups')">
+        <div class="stat-icon">💰</div>
+        <div class="stat-value">{{ totalSavings | number:'1.0-0' }}</div>
+        <div class="stat-label">HTG Epay</div>
+      </div>
+      <div class="stat-box warning" (click)="scrollToSection('groups')">
+        <div class="stat-icon">📊</div>
+        <div class="stat-value">{{ groupCount }}</div>
+        <div class="stat-label">Gwoup Aktif</div>
+      </div>
+      <div class="stat-box info" (click)="scrollToSection('training')">
+        <div class="stat-icon">🎓</div>
+        <div class="stat-value">{{ trainingCount }}</div>
+        <div class="stat-label">Fòmasyon</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Savings Chart Section -->
+  <section class="chart-section">
+    <h2 class="section-title">
+      <span class="title-icon">📈</span>
+      Estatistik Epay
+    </h2>
+    <div class="chart-container">
+      <div class="bar-chart">
+        <div class="chart-bars">
+          <div class="bar-group" *ngFor="let group of groups" (click)="openGroupDetail(group)">
+            <div class="bar" [style.height.%]="getBarHeight(group.totalSavings)">
+              <span class="bar-value">{{ group.totalSavings | number:'1.0-0' }}</span>
+            </div>
+            <div class="bar-label">{{ group.name | slice:0:12 }}</div>
+          </div>
+        </div>
+        <div class="chart-baseline"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Groups Overview -->
+  <section class="groups-section" id="groups">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span class="title-icon">🏦</span>
+        Gwoup Epay
+      </h2>
+      <button class="add-btn" (click)="openAddGroupModal()">
+        <ion-icon name="add"></ion-icon>
+        Nouvo
+      </button>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="groups.length === 0">
+      <div class="empty-icon">💰</div>
+      <h3>Pa gen gwoup ankò</h3>
+      <p>Kreye premye gwoup epay ou a</p>
+      <button class="primary-btn" (click)="openAddGroupModal()">
+        <ion-icon name="add"></ion-icon>
+        Kreye Gwoup
+      </button>
+    </div>
+
+    <div class="groups-grid" *ngIf="groups.length > 0">
+      <div class="group-card clickable" *ngFor="let group of groups" (click)="openGroupDetail(group)">
+        <div class="group-header">
+          <div class="group-type-badge" [class]="group.type">
+            {{ group.type === 'mutuelle' ? '🤝' : group.type === 'sol' ? '💰' : '👥' }}
+          </div>
+          <div class="group-info">
+            <h3>{{ group.name }}</h3>
+            <p class="group-location">{{ group.section }}</p>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+        </div>
+        <div class="group-stats-mini">
+          <div class="mini-stat">
+            <span class="value">{{ group.memberCount }}</span>
+            <span class="label">Manm</span>
+          </div>
+          <div class="mini-stat">
+            <span class="value">{{ group.totalSavings | number:'1.0-0' }}</span>
+            <span class="label">HTG</span>
+          </div>
+          <div class="mini-stat">
+            <span class="value">{{ group.activeLoans }}</span>
+            <span class="label">Prè</span>
+          </div>
+        </div>
+        <div class="group-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" [style.width.%]="getGroupProgress(group)"></div>
+          </div>
+          <span class="progress-label">{{ getGroupProgress(group) | number:'1.0-0' }}% objektif</span>
+        </div>
+        <div class="group-actions" (click)="$event.stopPropagation()">
+          <button class="action-btn" (click)="addContribution(group)">
+            <ion-icon name="cash-outline"></ion-icon>
+            Kotizasyon
+          </button>
+          <button class="action-btn" (click)="addMemberToGroup(group)">
+            <ion-icon name="person-add-outline"></ion-icon>
+            Manm
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donut Chart - Member Distribution -->
+  <section class="distribution-section" *ngIf="groups.length > 0">
+    <h2 class="section-title">
+      <span class="title-icon">🥧</span>
+      Distribisyon Manm
+    </h2>
+    <div class="donut-container">
+      <div class="donut-chart">
+        <svg viewBox="0 0 100 100" class="donut-svg">
+          <circle class="donut-segment seg-1"
+                  cx="50" cy="50" r="40"
+                  [attr.stroke-dasharray]="getDonutSegment(0)"
+                  [attr.stroke-dashoffset]="getDonutOffset(0)"></circle>
+          <circle class="donut-segment seg-2"
+                  cx="50" cy="50" r="40"
+                  [attr.stroke-dasharray]="getDonutSegment(1)"
+                  [attr.stroke-dashoffset]="getDonutOffset(1)"></circle>
+          <circle class="donut-segment seg-3"
+                  cx="50" cy="50" r="40"
+                  [attr.stroke-dasharray]="getDonutSegment(2)"
+                  [attr.stroke-dashoffset]="getDonutOffset(2)"></circle>
+        </svg>
+        <div class="donut-center">
+          <span class="donut-total">{{ totalMembers }}</span>
+          <span class="donut-label">Total</span>
+        </div>
+      </div>
+      <div class="donut-legend">
+        <div class="legend-item clickable" *ngFor="let group of groups; let i = index" (click)="openGroupDetail(group)">
+          <span class="legend-color" [class]="'color-' + (i + 1)"></span>
+          <span class="legend-name">{{ group.name }}</span>
+          <span class="legend-value">{{ group.memberCount }} manm</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Leadership Section -->
+  <section class="leadership-section" id="leadership">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span class="title-icon">🎓</span>
+        Rasin Lidèchip - VPC
+      </h2>
+      <button class="add-btn light" (click)="openAddVPCModal()">
+        <ion-icon name="add"></ion-icon>
+        Nouvo VPC
+      </button>
+    </div>
+    <div class="leadership-stats">
+      <div class="leadership-card clickable" (click)="showVPCList()">
+        <div class="leadership-number">{{ vpcCount }}</div>
+        <div class="leadership-label">Volontè pou Chanjman</div>
+        <div class="leadership-desc">Ajan chanjman nan kominote a</div>
+      </div>
+      <div class="leadership-card">
+        <div class="leadership-number">{{ totalTrainingHours }}</div>
+        <div class="leadership-label">Èdtan Fòmasyon</div>
+        <div class="leadership-desc">Total fòmasyon konplete</div>
+      </div>
+      <div class="leadership-card clickable" (click)="showActionPlans()">
+        <div class="leadership-number">{{ actionPlanCount }}</div>
+        <div class="leadership-label">Plan Aksyon</div>
+        <div class="leadership-desc">Pwojè kominotè an kou</div>
+      </div>
+    </div>
+
+    <!-- VPC Members List -->
+    <div class="vpc-list" *ngIf="showVPCs && vpcMembers.length > 0">
+      <h3>Manm VPC yo</h3>
+      <div class="vpc-item" *ngFor="let vpc of vpcMembers" (click)="openVPCDetail(vpc)">
+        <div class="vpc-avatar">{{ getInitials(vpc.name) }}</div>
+        <div class="vpc-info">
+          <span class="vpc-name">{{ vpc.name }}</span>
+          <span class="vpc-section">{{ vpc.section }} • {{ vpc.trainingHours }} èdtan</span>
+        </div>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+      </div>
+    </div>
+  </section>
+
+  <!-- Training Programs -->
+  <section class="training-section" id="training">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span class="title-icon">📚</span>
+        Pwogram Fòmasyon
+      </h2>
+      <button class="add-btn" (click)="openAddTrainingModal()">
+        <ion-icon name="add"></ion-icon>
+        Nouvo
+      </button>
+    </div>
+
+    <!-- Empty state -->
+    <div class="empty-state" *ngIf="trainings.length === 0">
+      <div class="empty-icon">📚</div>
+      <h3>Pa gen fòmasyon ankò</h3>
+      <p>Ajoute premye pwogram fòmasyon an</p>
+      <button class="primary-btn" (click)="openAddTrainingModal()">
+        <ion-icon name="add"></ion-icon>
+        Ajoute Fòmasyon
+      </button>
+    </div>
+
+    <div class="training-grid" *ngIf="trainings.length > 0">
+      <div class="training-card clickable" *ngFor="let training of trainings" (click)="openTrainingDetail(training)">
+        <div class="training-icon">{{ getCategoryIcon(training.category) }}</div>
+        <h4>{{ training.nameCreole }}</h4>
+        <p class="training-hours">{{ training.hours }} èdtan</p>
+        <div class="training-category">{{ getCategoryLabel(training.category) }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact Section -->
+  <section class="impact-section" id="impact">
+    <h2 class="section-title">
+      <span class="title-icon">🌟</span>
+      Enpak Nou
+    </h2>
+    <div class="impact-grid">
+      <div class="impact-card">
+        <div class="impact-icon">🏘️</div>
+        <div class="impact-stat">11</div>
+        <div class="impact-label">Seksyon Kominote</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">👩‍👩‍👧‍👦</div>
+        <div class="impact-stat">85,000+</div>
+        <div class="impact-label">Moun sou Lil la</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">🤝</div>
+        <div class="impact-stat">485</div>
+        <div class="impact-label">CBO Patnè</div>
+      </div>
+      <div class="impact-card">
+        <div class="impact-icon">💪</div>
+        <div class="impact-stat">24,000+</div>
+        <div class="impact-label">Moun Reprezante</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="about-content">
+      <h2>Konsènan Rasin Gonav</h2>
+      <p>
+        Rasin Gonav se yon platfòm kominotè ki ede gwoup epay (Sol ak Mutuelle)
+        nan La Gonâve jere lajan yo pi byen. Li sipòte tou pwogram lidèchip VPC
+        (Volontè pou Chanjman) pou devlope ajan chanjman nan kominote a.
+      </p>
+      <div class="about-features">
+        <div class="feature">
+          <span class="feature-icon">✓</span>
+          <span>Jesyon gwoup epay fasil</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">✓</span>
+          <span>Swivi kotizasyon ak prè</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">✓</span>
+          <span>Fòmasyon lidèchip</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">✓</span>
+          <span>Plan aksyon kominotè</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="app-footer" id="about">
+    <div class="footer-content">
+      <p class="footer-brand">Rasin Gonav</p>
+      <p class="footer-tagline">Yon Pwojè Rasin Devlopman</p>
+      <p class="footer-org">Roots of Development</p>
+    </div>
+  </footer>
+</ion-content>
+
+<!-- Floating Action Button -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" class="main-fab">
+  <ion-fab-button color="primary" (click)="toggleFabMenu()">
+    <ion-icon [name]="fabOpen ? 'close' : 'add'"></ion-icon>
+  </ion-fab-button>
+  <ion-fab-list side="top" [activated]="fabOpen">
+    <ion-fab-button color="success" (click)="openAddGroupModal()">
+      <ion-icon name="wallet-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="tertiary" (click)="openAddVPCModal()">
+      <ion-icon name="person-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-button color="warning" (click)="openAddTrainingModal()">
+      <ion-icon name="book-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
+
+<!-- Bottom Tab Navigation -->
+<ion-footer class="ion-no-border">
+  <div class="bottom-nav">
+    <button class="nav-item" [class.active]="activeNav === 'home'" (click)="scrollToTop()">
+      <ion-icon [name]="activeNav === 'home' ? 'home' : 'home-outline'"></ion-icon>
+      <span>Akèy</span>
+    </button>
+    <button class="nav-item" [class.active]="activeNav === 'groups'" (click)="scrollToSection('groups')">
+      <ion-icon [name]="activeNav === 'groups' ? 'wallet' : 'wallet-outline'"></ion-icon>
+      <span>Gwoup</span>
+    </button>
+    <button class="nav-item" [class.active]="activeNav === 'leadership'" (click)="scrollToSection('leadership')">
+      <ion-icon [name]="activeNav === 'leadership' ? 'school' : 'school-outline'"></ion-icon>
+      <span>Lidèchip</span>
+    </button>
+    <button class="nav-item" [class.active]="activeNav === 'training'" (click)="scrollToSection('training')">
+      <ion-icon [name]="activeNav === 'training' ? 'book' : 'book-outline'"></ion-icon>
+      <span>Fòmasyon</span>
+    </button>
+    <button class="nav-item" [class.active]="activeNav === 'impact'" (click)="scrollToSection('impact')">
+      <ion-icon [name]="activeNav === 'impact' ? 'stats-chart' : 'stats-chart-outline'"></ion-icon>
+      <span>Enpak</span>
+    </button>
+  </div>
+</ion-footer>
+
+<!-- Add Group Modal -->
+<ion-modal [isOpen]="showGroupModal" (didDismiss)="showGroupModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Kreye Gwoup Nouvo</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showGroupModal = false">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <div class="form-group">
+        <label>Non Gwoup *</label>
+        <input type="text" [(ngModel)]="newGroup.name" placeholder="Antre non gwoup la">
+      </div>
+      <div class="form-group">
+        <label>Tip Gwoup *</label>
+        <div class="type-selector">
+          <button [class.selected]="newGroup.type === 'mutuelle'" (click)="newGroup.type = 'mutuelle'">
+            🤝 Mutuelle
+          </button>
+          <button [class.selected]="newGroup.type === 'sol'" (click)="newGroup.type = 'sol'">
+            💰 Sol
+          </button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Seksyon *</label>
+        <select [(ngModel)]="newGroup.section">
+          <option value="">Chwazi seksyon...</option>
+          <option *ngFor="let s of sections" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Jou Reyinyon</label>
+        <select [(ngModel)]="newGroup.meetingDay">
+          <option value="Lendi">Lendi</option>
+          <option value="Madi">Madi</option>
+          <option value="Mèkredi">Mèkredi</option>
+          <option value="Jedi">Jedi</option>
+          <option value="Vandredi">Vandredi</option>
+          <option value="Samdi">Samdi</option>
+          <option value="Dimanch">Dimanch</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Deskripsyon</label>
+        <textarea [(ngModel)]="newGroup.description" placeholder="Deskripsyon gwoup la (opsyonèl)"></textarea>
+      </div>
+      <button class="submit-btn" (click)="createGroup()" [disabled]="!newGroup.name || !newGroup.section">
+        <ion-icon name="checkmark"></ion-icon>
+        Kreye Gwoup
+      </button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Add VPC Modal -->
+<ion-modal [isOpen]="showVPCModal" (didDismiss)="showVPCModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Ajoute VPC Nouvo</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showVPCModal = false">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <div class="form-group">
+        <label>Non Konplè *</label>
+        <input type="text" [(ngModel)]="newVPC.name" placeholder="Non ak siyati">
+      </div>
+      <div class="form-group">
+        <label>Seksyon *</label>
+        <select [(ngModel)]="newVPC.section">
+          <option value="">Chwazi seksyon...</option>
+          <option *ngFor="let s of sections" [value]="s">{{ s }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Telefòn</label>
+        <input type="tel" [(ngModel)]="newVPC.phone" placeholder="509 XXXX XXXX">
+      </div>
+      <button class="submit-btn" (click)="createVPC()" [disabled]="!newVPC.name || !newVPC.section">
+        <ion-icon name="checkmark"></ion-icon>
+        Ajoute VPC
+      </button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Add Training Modal -->
+<ion-modal [isOpen]="showTrainingModal" (didDismiss)="showTrainingModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Nouvo Fòmasyon</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showTrainingModal = false">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <div class="form-group">
+        <label>Non an Kreyòl *</label>
+        <input type="text" [(ngModel)]="newTraining.nameCreole" placeholder="Non fòmasyon an">
+      </div>
+      <div class="form-group">
+        <label>Non an Anglè</label>
+        <input type="text" [(ngModel)]="newTraining.name" placeholder="Training name (optional)">
+      </div>
+      <div class="form-group">
+        <label>Kategori *</label>
+        <select [(ngModel)]="newTraining.category">
+          <option value="leadership">👑 Lidèchip</option>
+          <option value="project_management">📋 Jesyon Pwojè</option>
+          <option value="civic">🏛️ Angajman Sivik</option>
+          <option value="technical">🔧 Teknik</option>
+          <option value="entrepreneurship">💼 Antreprenarya</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Kantite Èdtan *</label>
+        <input type="number" [(ngModel)]="newTraining.hours" placeholder="8" min="1">
+      </div>
+      <button class="submit-btn" (click)="createTraining()" [disabled]="!newTraining.nameCreole || !newTraining.hours">
+        <ion-icon name="checkmark"></ion-icon>
+        Ajoute Fòmasyon
+      </button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Group Detail Modal -->
+<ion-modal [isOpen]="showGroupDetailModal" (didDismiss)="showGroupDetailModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="showGroupDetailModal = false">
+            <ion-icon name="arrow-back"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>{{ selectedGroup?.name }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content" *ngIf="selectedGroup">
+      <div class="detail-header">
+        <div class="detail-badge" [class]="selectedGroup.type">
+          {{ selectedGroup.type === 'mutuelle' ? '🤝' : '💰' }}
+        </div>
+        <div class="detail-info">
+          <h2>{{ selectedGroup.name }}</h2>
+          <p>{{ selectedGroup.section }} • {{ selectedGroup.type | titlecase }}</p>
+        </div>
+      </div>
+
+      <div class="detail-stats">
+        <div class="detail-stat">
+          <span class="stat-value">{{ selectedGroup.memberCount }}</span>
+          <span class="stat-label">Manm</span>
+        </div>
+        <div class="detail-stat">
+          <span class="stat-value">{{ selectedGroup.totalSavings | number:'1.0-0' }}</span>
+          <span class="stat-label">HTG Epay</span>
+        </div>
+        <div class="detail-stat">
+          <span class="stat-value">{{ selectedGroup.activeLoans }}</span>
+          <span class="stat-label">Prè Aktif</span>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h3>Aksyon Rapid</h3>
+        <div class="action-grid">
+          <button class="action-card" (click)="openContributionModal()">
+            <ion-icon name="cash-outline"></ion-icon>
+            <span>Ajoute Kotizasyon</span>
+          </button>
+          <button class="action-card" (click)="openAddMemberModal()">
+            <ion-icon name="person-add-outline"></ion-icon>
+            <span>Ajoute Manm</span>
+          </button>
+          <button class="action-card" (click)="openLoanModal()">
+            <ion-icon name="card-outline"></ion-icon>
+            <span>Nouvo Prè</span>
+          </button>
+          <button class="action-card danger" (click)="deleteGroup(selectedGroup)">
+            <ion-icon name="trash-outline"></ion-icon>
+            <span>Efase Gwoup</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Members List -->
+      <div class="detail-section">
+        <div class="section-header-inline">
+          <h3>Manm yo ({{ groupMembers.length }})</h3>
+          <button class="small-add-btn" (click)="openAddMemberModal()">
+            <ion-icon name="add"></ion-icon>
+          </button>
+        </div>
+        <div class="members-list" *ngIf="groupMembers.length > 0">
+          <div class="member-item" *ngFor="let member of groupMembers">
+            <div class="member-avatar">{{ getInitials(member.name) }}</div>
+            <div class="member-info">
+              <span class="member-name">{{ member.name }}</span>
+              <span class="member-role">{{ getRoleLabel(member.role) }} • {{ member.balance | number:'1.0-0' }} HTG</span>
+            </div>
+            <button class="icon-btn" (click)="deleteMember(member)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </div>
+        </div>
+        <div class="empty-mini" *ngIf="groupMembers.length === 0">
+          <p>Pa gen manm ankò</p>
+          <button class="small-primary-btn" (click)="openAddMemberModal()">Ajoute Manm</button>
+        </div>
+      </div>
+
+      <!-- Active Loans -->
+      <div class="detail-section" *ngIf="groupLoans.length > 0">
+        <h3>Prè Aktif</h3>
+        <div class="loans-list">
+          <div class="loan-item" *ngFor="let loan of groupLoans">
+            <div class="loan-info">
+              <span class="loan-name">{{ loan.memberName }}</span>
+              <span class="loan-amount">{{ loan.amount | number:'1.0-0' }} HTG</span>
+            </div>
+            <div class="loan-meta">
+              <span class="loan-status" [class]="loan.status">{{ getLoanStatusLabel(loan.status) }}</span>
+              <span class="loan-due">Echeyans: {{ formatDate(loan.dueDate) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section" *ngIf="selectedGroup.description">
+        <h3>Deskripsyon</h3>
+        <p>{{ selectedGroup.description }}</p>
+      </div>
+
+      <div class="detail-section">
+        <h3>Enfòmasyon</h3>
+        <div class="info-row">
+          <span class="info-label">Jou Reyinyon:</span>
+          <span class="info-value">{{ selectedGroup.meetingDay }}</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Frekans:</span>
+          <span class="info-value">{{ getMeetingFrequency(selectedGroup.meetingFrequency) }}</span>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Add Member Modal -->
+<ion-modal [isOpen]="showMemberModal" (didDismiss)="showMemberModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Ajoute Manm Nouvo</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showMemberModal = false">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <div class="form-group">
+        <label>Non Konplè *</label>
+        <input type="text" [(ngModel)]="newMember.name" placeholder="Non ak siyati">
+      </div>
+      <div class="form-group">
+        <label>Telefòn</label>
+        <input type="tel" [(ngModel)]="newMember.phone" placeholder="509 XXXX XXXX">
+      </div>
+      <div class="form-group">
+        <label>Wòl</label>
+        <select [(ngModel)]="newMember.role">
+          <option value="member">Manm</option>
+          <option value="leader">Lidè</option>
+          <option value="treasurer">Trezorye</option>
+          <option value="secretary">Sekretè</option>
+        </select>
+      </div>
+      <button class="submit-btn" (click)="createMember()" [disabled]="!newMember.name">
+        <ion-icon name="checkmark"></ion-icon>
+        Ajoute Manm
+      </button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Add Contribution Modal -->
+<ion-modal [isOpen]="showContributionModal" (didDismiss)="showContributionModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Ajoute Kotizasyon</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showContributionModal = false">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <div class="form-group">
+        <label>Manm *</label>
+        <select [(ngModel)]="newContribution.memberId">
+          <option value="">Chwazi manm...</option>
+          <option *ngFor="let m of groupMembers" [value]="m.id">{{ m.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Montan (HTG) *</label>
+        <input type="number" [(ngModel)]="newContribution.amount" placeholder="1000" min="1">
+      </div>
+      <div class="form-group">
+        <label>Nòt (opsyonèl)</label>
+        <textarea [(ngModel)]="newContribution.notes" placeholder="Antre nòt si genyen..."></textarea>
+      </div>
+      <button class="submit-btn" (click)="createContribution()" [disabled]="!newContribution.memberId || !newContribution.amount">
+        <ion-icon name="checkmark"></ion-icon>
+        Anrejistre Kotizasyon
+      </button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<!-- Add Loan Modal -->
+<ion-modal [isOpen]="showLoanModal" (didDismiss)="showLoanModal = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Nouvo Prè</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="showLoanModal = false">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <div class="form-group">
+        <label>Manm *</label>
+        <select [(ngModel)]="newLoan.memberId">
+          <option value="">Chwazi manm...</option>
+          <option *ngFor="let m of groupMembers" [value]="m.id">{{ m.name }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Montan Prè (HTG) *</label>
+        <input type="number" [(ngModel)]="newLoan.amount" placeholder="5000" min="1">
+      </div>
+      <div class="form-group">
+        <label>To Enterè (%)</label>
+        <input type="number" [(ngModel)]="newLoan.interestRate" placeholder="10" min="0" max="100">
+      </div>
+      <div class="form-group">
+        <label>Dire (mwa)</label>
+        <select [(ngModel)]="newLoan.dueMonths">
+          <option [value]="1">1 mwa</option>
+          <option [value]="2">2 mwa</option>
+          <option [value]="3">3 mwa</option>
+          <option [value]="6">6 mwa</option>
+          <option [value]="12">12 mwa</option>
+        </select>
+      </div>
+      <button class="submit-btn" (click)="createLoan()" [disabled]="!newLoan.memberId || !newLoan.amount">
+        <ion-icon name="checkmark"></ion-icon>
+        Kreye Prè
+      </button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

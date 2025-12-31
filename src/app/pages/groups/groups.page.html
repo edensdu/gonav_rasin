@@ -1,0 +1,71 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/dashboard" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Gwoup Mwen</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="addGroup()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="groups.length === 0">
+    <div class="empty-icon">💰</div>
+    <h2>Pa gen gwoup ankò</h2>
+    <p>Kreye premye gwoup epay ou a</p>
+    <ion-button (click)="addGroup()">
+      <ion-icon name="add" slot="start"></ion-icon>
+      Kreye Gwoup
+    </ion-button>
+  </div>
+
+  <!-- Groups List -->
+  <ion-list *ngIf="groups.length > 0" lines="none">
+    <ion-card *ngFor="let group of groups" (click)="openGroup(group)" class="group-card">
+      <ion-card-content>
+        <div class="group-header">
+          <div class="group-icon">
+            {{ group.type === 'mutuelle' ? '🤝' : group.type === 'sol' ? '💰' : '👥' }}
+          </div>
+          <div class="group-info">
+            <h3>{{ group.name }}</h3>
+            <p class="group-type">{{ getTypeLabel(group.type) }} • {{ group.section }}</p>
+          </div>
+          <ion-icon name="chevron-forward-outline" class="chevron"></ion-icon>
+        </div>
+
+        <div class="group-stats">
+          <div class="stat">
+            <span class="value">{{ group.memberCount }}</span>
+            <span class="label">Manm</span>
+          </div>
+          <div class="stat">
+            <span class="value">{{ group.totalSavings | number }} HTG</span>
+            <span class="label">Epay</span>
+          </div>
+          <div class="stat">
+            <span class="value">{{ group.activeLoans }}</span>
+            <span class="label">Prè Aktif</span>
+          </div>
+        </div>
+
+        <div class="group-meeting" *ngIf="group.meetingDay">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>{{ group.meetingDay }} ({{ getMeetingFrequency(group.meetingFrequency) }})</span>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- FAB for adding group -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="groups.length > 0">
+    <ion-fab-button (click)="addGroup()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
